@@ -1,592 +1,285 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manish Kumar | AI Architect & Founder</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-
+    <title>Manish Kumar - AI Researcher & Software Engineer</title>
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .selection-bg::selection { background-color: #bfdbfe; color: #1e3a8a; }
+        :root {
+            --primary: #1e293b;
+            --secondary: #475569;
+            --accent: #0ea5e9;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--primary);
+            background-color: var(--bg);
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent);
+            margin-bottom: 1rem;
+            background-color: #e2e8f0;
+        }
+        header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2.5rem;
+        }
+        header p.subtitle {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            margin-bottom: 0.5rem;
+        }
+        header p.location {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            transition: all 0.2s ease;
+        }
+        .social-links a:hover {
+            background-color: white;
+            color: var(--primary);
+            border-color: white;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            top: -2rem;
+        }
+        section {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--border);
+        }
+        h2 {
+            color: var(--primary);
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            font-size: 1.5rem;
+        }
+        .job { margin-bottom: 2.5rem; }
+        .job:last-child { margin-bottom: 0; }
+        .job-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; flex-wrap: wrap; }
+        .job-title { font-weight: bold; font-size: 1.25rem; color: var(--primary); }
+        .company { color: var(--accent); font-weight: 600; }
+        .date { color: var(--secondary); font-size: 0.95rem; font-weight: 500; }
+        p { color: var(--secondary); margin-bottom: 1rem; }
+        ul { margin: 0.5rem 0; padding-left: 1.5rem; color: var(--secondary); }
+        li { margin-bottom: 0.5rem; }
+        .repos-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; }
+        .repo-category h3 { font-size: 1.1rem; color: var(--primary); margin-top: 0; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .repo-list { display: flex; flex-direction: column; gap: 0.75rem; }
+        .repo-card { padding: 1rem; background: #fafafa; border: 1px solid var(--border); border-radius: 6px; transition: all 0.2s ease; }
+        .repo-card:hover { transform: translateY(-2px); border-color: var(--accent); background: #fff; }
+        .repo-card a { text-decoration: none; color: var(--primary); font-weight: 600; font-size: 0.95rem; display: block; }
+        .repo-card a:hover { color: var(--accent); }
+        .repo-card p { font-size: 0.85rem; margin: 0.25rem 0 0 0; color: var(--secondary); }
+        .skills { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+        .skill-tag { background-color: #f0f9ff; color: #0284c7; padding: 0.5rem 1rem; border-radius: 9999px; font-size: 0.9rem; font-weight: 600; border: 1px solid #bae6fd; }
+        @media (max-width: 768px) { .repos-container { grid-template-columns: 1fr; } }
+        @media (max-width: 600px) { 
+            .job-header { flex-direction: column; } 
+            .date { margin-top: 0.2rem; } 
+            .container { padding: 1rem; top: 0; } 
+            .social-links { gap: 0.5rem; }
+            .social-links a { padding: 0.4rem 1rem; font-size: 0.85rem; }
+        }
     </style>
 </head>
-<body class="min-h-screen bg-slate-50 selection-bg text-slate-900">
+<body>
+    <header>
+        <!-- REPLACE THE 'src' ATTRIBUTE BELOW WITH YOUR PHOTO FILE NAME -->
+        <img src="./media/manish_photo.jpeg" alt="Manish Kumar" class="profile-pic">
+        
+        <h1>Manish Kumar <span style="font-size: 1.2rem; font-weight: normal; color: #94a3b8;">(He/Him)</span></h1>
+        <p class="subtitle">AI Researcher | Building Video Foundation Models @ Zulense | Open Source Contributor</p>
+        <p class="location">Faridabad, Haryana, India</p>
 
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-transparent py-5">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center">
-                    <span class="text-xl font-bold tracking-tighter text-slate-900">
-                        Manish<span class="text-blue-600">.</span>
-                    </span>
-                </div>
-                
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex space-x-8">
-                    <button data-target="about" class="nav-link text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors uppercase tracking-wider">About</button>
-                    <button data-target="zulense" class="nav-link text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors uppercase tracking-wider">Zulense</button>
-                    <button data-target="experience" class="nav-link text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors uppercase tracking-wider">Experience</button>
-                    <button data-target="projects" class="nav-link text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors uppercase tracking-wider">Projects</button>
-                    <button data-target="huggingface" class="nav-link text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors uppercase tracking-wider">HuggingFace</button>
-                    <button data-target="skills" class="nav-link text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors uppercase tracking-wider">Skills</button>
-                </div>
-
-                <!-- Social Icons Desktop -->
-                <div class="hidden md:flex items-center space-x-4">
-                    <a href="https://github.com/ProgramerSalar?tab=repositories" target="_blank" class="text-slate-500 hover:text-slate-900 transition-colors">
-                        <i data-lucide="github" class="w-5 h-5"></i>
-                    </a>
-                    <a href="https://huggingface.co/ProgramerSalar" target="_blank" class="flex items-center gap-1 text-slate-500 hover:text-yellow-600 transition-colors font-semibold text-sm">
-                        <span>🤗</span> HF
-                    </a>
-                    <a href="#" class="text-slate-500 hover:text-blue-700 transition-colors">
-                        <i data-lucide="linkedin" class="w-5 h-5"></i>
-                    </a>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="text-slate-900 p-2">
-                        <i id="menu-icon" data-lucide="menu" class="w-6 h-6"></i>
-                    </button>
-                </div>
-            </div>
+        <div class="social-links">
+            <a href="mailto:aimanish0147@gmail.com">Email Me</a>
+            <a href="https://www.linkedin.com/in/manish-kumar-584880365/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/ProgramerSalar" target="_blank">GitHub</a>
+            <a href="https://huggingface.co/ProgramerSalar" target="_blank">Hugging Face</a>
         </div>
+    </header>
 
-        <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 shadow-lg absolute w-full left-0 top-full">
-            <div class="px-4 pt-2 pb-6 space-y-1">
-                <button data-target="about" class="nav-link block w-full text-left px-3 py-3 text-base font-medium text-slate-900 hover:bg-slate-50 uppercase tracking-wider">About</button>
-                <button data-target="zulense" class="nav-link block w-full text-left px-3 py-3 text-base font-medium text-slate-900 hover:bg-slate-50 uppercase tracking-wider">Zulense</button>
-                <button data-target="experience" class="nav-link block w-full text-left px-3 py-3 text-base font-medium text-slate-900 hover:bg-slate-50 uppercase tracking-wider">Experience</button>
-                <button data-target="projects" class="nav-link block w-full text-left px-3 py-3 text-base font-medium text-slate-900 hover:bg-slate-50 uppercase tracking-wider">Projects</button>
-                <button data-target="huggingface" class="nav-link block w-full text-left px-3 py-3 text-base font-medium text-slate-900 hover:bg-slate-50 uppercase tracking-wider">HuggingFace</button>
-                <button data-target="skills" class="nav-link block w-full text-left px-3 py-3 text-base font-medium text-slate-900 hover:bg-slate-50 uppercase tracking-wider">Skills</button>
-                
-                <div class="flex space-x-6 px-3 py-4 border-t border-slate-100 mt-4">
-                    <a href="https://github.com/ProgramerSalar?tab=repositories" class="text-slate-500"><i data-lucide="github" class="w-6 h-6"></i></a>
-                    <a href="https://huggingface.co/ProgramerSalar" class="text-xl">🤗</a>
-                    <a href="#" class="text-slate-500"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <div class="container">
+        <section id="about">
+            <h2>About Me</h2>
+            <p>I am a software engineer and AI researcher focused on generative architectures, large-scale video models, and educational AI. I specialize in bridging the gap between state-of-the-art open-source research and production-grade applications.</p>
+            <p>Currently exploring full-time engineering roles with innovative, fast-moving teams where I can help build highly complex, large-scale software products. Alongside full-time opportunities, I am always open to connecting with AI researchers, tech-focused founders, and early-stage investors interested in the future of pedagogical AI and foundational video models.</p>
+        </section>
 
-    <section id="about" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        <!-- Background Elements -->
-        <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
-            <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-100/50 blur-[100px]"></div>
-            <div class="absolute bottom-[-10%] right-[-5%] w-[30%] h-[30%] rounded-full bg-indigo-100/50 blur-[80px]"></div>
-        </div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="max-w-2xl">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-sm font-medium mb-6">
-                        <span class="relative flex h-2 w-2">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-                        </span>
-                        AI Architect & Founder
-                    </div>
-                    <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1]">
-                        Engineering <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Pedagogical AI.</span>
-                    </h1>
-                    <p class="text-xl text-slate-600 mb-8 leading-relaxed">
-                        Hi, I'm Manish Kumar. I specialize in spatial-temporal attention systems, latent extraction metrics, and video diffusion models. Currently building the next generation of generative AI infrastructure to revolutionize global education.
-                    </p>
-                    
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <button data-target="zulense" class="nav-link px-8 py-4 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition-colors shadow-lg shadow-slate-900/20 flex items-center justify-center gap-2">
-                            Explore Zulense <i data-lucide="external-link" class="w-4 h-4"></i>
-                        </button>
-                        <button data-target="experience" class="nav-link px-8 py-4 bg-white text-slate-900 border border-slate-200 rounded-lg font-medium hover:bg-slate-50 hover:border-slate-300 transition-all flex items-center justify-center gap-2">
-                            View Experience <i data-lucide="chevron-down" class="w-4 h-4"></i>
-                        </button>
+        <section id="repositories">
+            <h2>Open Source & Project Ecosystems</h2>
+            <div class="repos-container">
+                <!-- Hugging Face Ecosystem -->
+                <div class="repo-category">
+                    <h3>🤗 Hugging Face Models & Hub</h3>
+                    <div class="repo-list">
+                        <div class="repo-card">
+                            <a href="https://huggingface.co/zulense/Z1_V0.1.0" target="_blank">zulense/Z1_V0.1.0</a>
+                            <p>Foundational vertical video model architecture built for digital education.</p>
+                        </div>
+                        <div class="repo-card">
+                            <a href="https://huggingface.co/datasets/zulense/white_board_clip_video" target="_blank">datasets/zulense/white_board_clip_video</a>
+                            <p>Curated text-to-video dataset optimizing sequential whiteboard visualizations.</p>
+                        </div>
+                        <div class="repo-card">
+                            <a href="https://huggingface.co/datasets/zulense/white_board" target="_blank">datasets/zulense/white_board</a>
+                            <p>Ecosystem data for instructional drawing and conceptual learning models.</p>
+                        </div>
                     </div>
                 </div>
-                
-                <!-- Abstract Tech Illustration -->
-                <div class="hidden lg:block relative h-[500px] w-full rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 border border-slate-200/60 shadow-2xl overflow-hidden">
-                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full px-8">
-                        <i data-lucide="brain-circuit" class="w-20 h-20 mx-auto text-blue-600/20 mb-4"></i>
-                        <p class="text-sm font-mono text-slate-400 uppercase tracking-widest">Neural Architecture // Gen AI</p>
-                        <div class="mt-8 space-y-3">
-                            <div class="h-2 w-3/4 bg-blue-500/20 mx-auto rounded overflow-hidden"><div class="h-full w-1/2 bg-blue-600 rounded"></div></div>
-                            <div class="h-2 w-1/2 bg-indigo-500/20 mx-auto rounded overflow-hidden"><div class="h-full w-3/4 bg-indigo-600 rounded"></div></div>
+
+                <!-- GitHub Projects -->
+                <div class="repo-category">
+                    <h3>💻 GitHub Repositories</h3>
+                    <div class="repo-list">
+                        <div class="repo-card">
+                            <a href="https://github.com/ProgramerSalar/stable-diffusion-from-scratch" target="_blank">stable-diffusion-from-scratch</a>
+                            <p>Clean engineering breakdown and implementation of text-to-image synthesis pipelines.</p>
+                        </div>
+                        <div class="repo-card">
+                            <a href="https://github.com/ProgramerSalar/causal-vae" target="_blank">causal-vae</a>
+                            <p>Spatiotemporal modeling architectures for causal video representation.</p>
+                        </div>
+                        <div class="repo-card">
+                            <a href="https://github.com/ProgramerSalar/video_generation" target="_blank">video_generation</a>
+                            <p>Core pipelines experimenting with temporal layers and state-of-the-art video architectures.</p>
+                        </div>
+                        <div class="repo-card">
+                            <a href="https://github.com/ProgramerSalar/DDPM" target="_blank">DDPM</a>
+                            <p>End-to-end implementation of Denoising Diffusion Probabilistic Models.</p>
+                        </div>
+                        <div class="repo-card">
+                            <a href="https://github.com/ProgramerSalar/VQ-VAE" target="_blank">VQ-VAE</a>
+                            <p>Vector Quantized Variational Autoencoders for discrete latent spaces.</p>
+                        </div>
+                        <div class="repo-card">
+                            <a href="https://github.com/ProgramerSalar/encoder_from_scratch" target="_blank">encoder_from_scratch</a>
+                            <p>Custom transformer-based text and visual feature extraction architecture.</p>
+                        </div>
+                        <div class="repo-card">
+                            <a href="https://github.com/ProgramerSalar/Discriminator" target="_blank">Discriminator</a>
+                            <p>Adversarial training evaluation pipelines tailored for generative media validation.</p>
+                        </div>
+                        <div class="repo-card">
+                            <a href="https://github.com/ProgramerSalar/LPIPS" target="_blank">LPIPS</a>
+                            <p>Learned Perceptual Image Patch Similarity verification utilities.</p>
+                        </div>
+                        <div class="repo-card">
+                            <a href="https://github.com/ProgramerSalar/flow" target="_blank">flow</a>
+                            <p>Flow-matching architectures and continuous normalizing flow implementations.</p>
+                        </div>
+                        <div class="repo-card">
+                            <a href="https://github.com/ProgramerSalar/Tools" target="_blank">Tools</a>
+                            <p>Engineering infrastructure scripts for efficient model setup, tracking, and evaluation.</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="zulense" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold tracking-tight">The Vision: Zulense</h2>
-                <p class="mt-4 text-lg text-slate-600 max-w-2xl">Building the world's first stroke-level video teaching model to power 24/7 personalized instructional video for the global education base layer.</p>
-                <div class="h-1 w-20 bg-blue-600 mt-6 rounded-full"></div>
-            </div>
+        <section id="experience">
+            <h2>Experience</h2>
             
-            <div class="grid lg:grid-cols-3 gap-8 mt-12">
-                <!-- Main Zulense Card -->
-                <div class="col-span-1 lg:col-span-2 bg-slate-900 rounded-3xl p-8 lg:p-12 text-white relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-blue-600/20 rounded-full blur-3xl transition-transform group-hover:scale-110"></div>
-                    <div class="relative z-10">
-                        <div class="flex items-center justify-between mb-8">
-                            <h3 class="text-3xl font-bold tracking-tight">Zulense Labs</h3>
-                            <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-mono text-blue-200 border border-white/10">Pre-Seed / NVIDIA Inception</span>
-                        </div>
-                        <p class="text-slate-300 text-lg mb-6 leading-relaxed">
-                            As Founder & AI Architect, I lead the development of the <strong>Z1 Imagination Engine</strong> and "Teacher Brain" architecture. We are moving beyond generalist media generation to create foundational models explicitly trained to instruct.
-                        </p>
-                        <ul class="space-y-4 mb-8">
-                            <li class="flex items-start gap-3">
-                                <div class="mt-1 w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0"></div>
-                                <p class="text-slate-300 text-sm leading-relaxed">
-                                    <strong class="text-white">Core Tech:</strong> Utilizing a specialized rendering subsystem enforcing strict mathematical rules to synthesize mathematically perfect, stroke-by-stroke equations with zero visual morphing.
-                                </p>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <div class="mt-1 w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0"></div>
-                                <p class="text-slate-300 text-sm leading-relaxed">
-                                    <strong class="text-white">Infrastructure:</strong> Directing the training of foundational models (LDMs & Video VAEs) using the AIRAWAT supercomputer facility.
-                                </p>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <div class="mt-1 w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0"></div>
-                                <p class="text-slate-300 text-sm leading-relaxed">
-                                    <strong class="text-white">Roadmap:</strong> Scaling architecture over two years to visually teach complex problem-solving (e.g., Class 5 mathematics and science).
-                                </p>
-                            </li>
-                        </ul>
-                        <a href="https://www.zulense.com" target="_blank" class="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-medium transition-colors">
-                            Visit zulense.com <i data-lucide="external-link" class="w-4 h-4"></i>
-                        </a>
-                    </div>
+            <div class="job">
+                <div class="job-header">
+                    <div class="job-title">Founder & AI Architect <span class="company">@ Zulense</span></div>
+                    <div class="date">Dec 2025 - Present</div>
                 </div>
+                <p>Building the world's first vertical video foundation model explicitly designed for pedagogical AI to solve "doubt debt" in global digital education.</p>
+                <ul>
+                    <li><strong>AI Architecture:</strong> Architecting the Zulense Z1 Model, focusing on text-to-video generation tailored for educational content, such as generating automated whiteboard handwriting sequences.</li>
+                    <li><strong>Infrastructure:</strong> Developing proprietary training infrastructure and optimizing compute scaling for efficient model training utilizing tools like Google Cloud and Google AI Studio.</li>
+                </ul>
+            </div>
 
-                <!-- Side Cards -->
-                <div class="col-span-1 space-y-8">
-                    <div class="bg-blue-50 border border-blue-100 rounded-3xl p-8">
-                        <i data-lucide="brain-circuit" class="w-8 h-8 text-blue-600 mb-4"></i>
-                        <h4 class="text-xl font-bold text-slate-900 mb-3">The "Fake Writing" Gap</h4>
-                        <p class="text-slate-600 text-sm leading-relaxed">
-                            Generalist AI models completely fail at board instruction. They hallucinate text and morph numbers. Z1 solves this deeply spatial-temporal problem.
-                        </p>
-                    </div>
-                    <div class="bg-indigo-50 border border-indigo-100 rounded-3xl p-8">
-                        <i data-lucide="database" class="w-8 h-8 text-indigo-600 mb-4"></i>
-                        <h4 class="text-xl font-bold text-slate-900 mb-3">Live Data Moat</h4>
-                        <p class="text-slate-600 text-sm leading-relaxed">
-                            Initial ground-truth dataset live on Hugging Face. We use an automated in-house handwriting engine for proprietary stroke annotations.
-                        </p>
-                    </div>
+            <div class="job">
+                <div class="job-header">
+                    <div class="job-title">Volunteer Open Source Contributor <span class="company">@ Hugging Face</span></div>
+                    <div class="date">Sep 2025 - Feb 2026</div>
                 </div>
+                <p>Contributed to the industry-standard PyTorch ecosystem for state-of-the-art generative image and video models (Diffusers Library).</p>
+                <ul>
+                    <li><strong>Pipeline Optimization:</strong> Improved inference latency and reduced VRAM consumption for diffusion models.</li>
+                    <li><strong>Core Architecture:</strong> Tinkered with custom U-Net designs and Denoising Diffusion Probabilistic Models (DDPM).</li>
+                </ul>
             </div>
-        </div>
-    </section>
 
-    <section id="experience" class="py-24 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Professional Journey</h2>
-                <p class="mt-4 text-lg text-slate-600 max-w-2xl">Building open-source infrastructure and deploying scalable machine learning systems.</p>
-                <div class="h-1 w-20 bg-blue-600 mt-6 rounded-full"></div>
-            </div>
-            
-            <div class="relative border-l border-slate-200 ml-3 md:ml-6 mt-12 space-y-16">
-                <!-- Zulense -->
-                <div class="relative pl-8 md:pl-12">
-                    <div class="absolute w-4 h-4 bg-white border-4 border-blue-600 rounded-full -left-[9px] top-1"></div>
-                    <div class="flex flex-col md:flex-row md:items-start md:justify-between mb-2">
-                        <div>
-                            <h3 class="text-2xl font-bold text-slate-900">Chief Executive Officer</h3>
-                            <p class="text-lg font-medium text-blue-600">zulense</p>
-                        </div>
-                        <div class="mt-1 md:mt-0 text-sm font-medium text-slate-500 bg-slate-100 px-3 py-1 rounded-full w-fit">
-                            Dec 2025 - Present · New Delhi, India
-                        </div>
-                    </div>
-                    <p class="text-slate-600 mt-4 leading-relaxed">
-                        Leading the development of the Z1 Imagination Engine to revolutionize automated conceptual teaching. Directing the training of foundational generative AI models using the AIRAWAT supercomputer, implementing DDPMs and U-Net backbones. Successfully raised Seed capital and recruiting top-tier IIT research talent.
-                    </p>
+            <div class="job">
+                <div class="job-header">
+                    <div class="job-title">Open-Source AI Researcher <span class="company">@ LAION</span></div>
+                    <div class="date">Jul 2024 - Sep 2025</div>
                 </div>
+                <p>Conducted applied research focusing on generative architectures, representation learning, and advanced Transformer models.</p>
+            </div>
 
-                <!-- Z.ai -->
-                <div class="relative pl-8 md:pl-12">
-                    <div class="absolute w-4 h-4 bg-white border-4 border-slate-400 rounded-full -left-[9px] top-1"></div>
-                    <div class="flex flex-col md:flex-row md:items-start md:justify-between mb-2">
-                        <div>
-                            <h3 class="text-2xl font-bold text-slate-900">Open Source Contributor</h3>
-                            <p class="text-lg font-medium text-blue-600">Z.ai</p>
-                        </div>
-                        <div class="mt-1 md:mt-0 text-sm font-medium text-slate-500 bg-slate-100 px-3 py-1 rounded-full w-fit">
-                            Feb 2026 - Present · Remote
-                        </div>
-                    </div>
-                    <p class="text-slate-600 mt-4 leading-relaxed">
-                        Contributing to the open-source development of <strong>CogVideo</strong>, a large-scale text-to-video generation model. Optimizing model inference scripts to improve generation speed and reduce VRAM consumption. Collaborating globally to resolve issues related to diffusion models and U-Net architectures.
-                    </p>
+            <div class="job">
+                <div class="job-header">
+                    <div class="job-title">Software Engineer <span class="company">@ Independent Consultant</span></div>
+                    <div class="date">Feb 2023 - Jul 2024</div>
                 </div>
-
-                <!-- Hugging Face -->
-                <div class="relative pl-8 md:pl-12">
-                    <div class="absolute w-4 h-4 bg-white border-4 border-slate-400 rounded-full -left-[9px] top-1"></div>
-                    <div class="flex flex-col md:flex-row md:items-start md:justify-between mb-2">
-                        <div>
-                            <h3 class="text-2xl font-bold text-slate-900">Open Source Contributor (Diffusers)</h3>
-                            <p class="text-lg font-medium text-blue-600">Hugging Face</p>
-                        </div>
-                        <div class="mt-1 md:mt-0 text-sm font-medium text-slate-500 bg-slate-100 px-3 py-1 rounded-full w-fit">
-                            Jun 2025 - Feb 2026 · Remote
-                        </div>
-                    </div>
-                    <p class="text-slate-600 mt-4 leading-relaxed">
-                        Active contributor to the industry-standard PyTorch ecosystem for generative image/video models. Optimized inference pipelines for VRAM efficiency, tinkered with core DDPM architectures for hardware stability, and addressed complex community issues via rigorous CI/CD workflows.
-                    </p>
-                </div>
-
-                <!-- Zoho -->
-                <div class="relative pl-8 md:pl-12">
-                    <div class="absolute w-4 h-4 bg-white border-4 border-slate-400 rounded-full -left-[9px] top-1"></div>
-                    <div class="flex flex-col md:flex-row md:items-start md:justify-between mb-2">
-                        <div>
-                            <h3 class="text-2xl font-bold text-slate-900">Machine Learning Engineer</h3>
-                            <p class="text-lg font-medium text-blue-600">Zoho</p>
-                        </div>
-                        <div class="mt-1 md:mt-0 text-sm font-medium text-slate-500 bg-slate-100 px-3 py-1 rounded-full w-fit">
-                            Apr 2023 - Sep 2025 · Gurugram, India
-                        </div>
-                    </div>
-                    <p class="text-slate-600 mt-4 leading-relaxed">
-                        Spearheaded end-to-end development of scalable ML models for enterprise applications. Automated advanced feature engineering processes and built robust data pipelines to process massive datasets. Monitored production performance to mitigate data drift and latency.
-                    </p>
-                </div>
+                <p>Specialized in full-stack web and cross-platform mobile development, building scalable e-commerce solutions and secure backend architectures.</p>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="py-16 bg-white border-t border-slate-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row items-center justify-between bg-slate-50 p-8 rounded-2xl border border-slate-200">
-                <div class="mb-6 md:mb-0">
-                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">Education</h3>
-                    <h4 class="text-2xl font-bold text-slate-900">National Institute of Technology, Patna</h4>
-                    <p class="text-lg text-slate-600 mt-1">Bachelor of Engineering, Computer Science</p>
-                </div>
-                <div class="text-slate-500 font-medium bg-white px-4 py-2 rounded-lg border border-slate-200 shadow-sm">
-                    Apr 2019 – Sep 2022
-                </div>
+        <section id="skills">
+            <h2>Top Skills</h2>
+            <div class="skills">
+                <span class="skill-tag">Video Diffusion Models</span>
+                <span class="skill-tag">PyTorch</span>
+                <span class="skill-tag">Hugging Face Diffusers</span>
+                <span class="skill-tag">U-Net Architectures</span>
+                <span class="skill-tag">Transformers</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">GitHub</span>
+                <span class="skill-tag">Google Cloud</span>
+                <span class="skill-tag">Google AI Studio</span>
+                <span class="skill-tag">React Native</span>
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">Full-Stack Development</span>
             </div>
-        </div>
-    </section>
-
-    <section id="projects" class="py-24 bg-slate-900 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-white">Top 10 Open Source & Core Projects</h2>
-                <p class="mt-4 text-lg text-slate-400 max-w-2xl">A deep dive into my top GitHub repositories, proprietary research architectures, and foundational model implementations.</p>
-                <div class="h-1 w-20 bg-blue-500 mt-6 rounded-full"></div>
-            </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-                
-                <!-- Project 1 -->
-                <a href="https://github.com/ProgramerSalar/video_generation" target="_blank" class="group bg-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-6 transition-all duration-300 hover:bg-slate-800 flex flex-col h-full">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="p-2 bg-blue-500/10 text-blue-400 rounded-lg group-hover:scale-110 transition-transform"><i data-lucide="folder-git-2" class="w-6 h-6"></i></div>
-                        <span class="text-xs font-medium px-2.5 py-1 bg-slate-700/50 text-slate-300 rounded-full border border-slate-600">AI Foundation</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">video_generation</h3>
-                    <div class="flex items-center gap-1.5 text-xs text-slate-400 mb-4 font-mono"><i data-lucide="calendar" class="w-3.5 h-3.5"></i><span>Nov 2025 - Present</span></div>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Advanced fine-tuning scripts and temporal attention optimizations for the Zulense Z1 foundational video model.</p>
-                    <div class="flex flex-wrap gap-2 mt-auto">
-                        <span class="text-xs font-medium text-blue-200 bg-blue-900/30 px-2 py-1 rounded-md border border-blue-800/50">Python</span>
-                        <span class="text-xs font-medium text-blue-200 bg-blue-900/30 px-2 py-1 rounded-md border border-blue-800/50">PyTorch</span>
-                    </div>
-                </a>
-
-                <!-- Project 2 -->
-                <a href="https://github.com/ProgramerSalar/causal-vae" target="_blank" class="group bg-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-6 transition-all duration-300 hover:bg-slate-800 flex flex-col h-full">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="p-2 bg-blue-500/10 text-blue-400 rounded-lg group-hover:scale-110 transition-transform"><i data-lucide="folder-git-2" class="w-6 h-6"></i></div>
-                        <span class="text-xs font-medium px-2.5 py-1 bg-slate-700/50 text-slate-300 rounded-full border border-slate-600">Generative AI</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">causal-vae</h3>
-                    <div class="flex items-center gap-1.5 text-xs text-slate-400 mb-4 font-mono"><i data-lucide="calendar" class="w-3.5 h-3.5"></i><span>Jan 2026</span></div>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">PyTorch implementation and training pipeline for fine-tuning Video Variational Autoencoders (VAEs).</p>
-                    <div class="flex flex-wrap gap-2 mt-auto">
-                        <span class="text-xs font-medium text-blue-200 bg-blue-900/30 px-2 py-1 rounded-md border border-blue-800/50">Python</span>
-                        <span class="text-xs font-medium text-blue-200 bg-blue-900/30 px-2 py-1 rounded-md border border-blue-800/50">Video VAE</span>
-                    </div>
-                </a>
-
-                <!-- Project 3 -->
-                <a href="https://github.com/ProgramerSalar/DDPM" target="_blank" class="group bg-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-6 transition-all duration-300 hover:bg-slate-800 flex flex-col h-full">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="p-2 bg-blue-500/10 text-blue-400 rounded-lg group-hover:scale-110 transition-transform"><i data-lucide="folder-git-2" class="w-6 h-6"></i></div>
-                        <span class="text-xs font-medium px-2.5 py-1 bg-slate-700/50 text-slate-300 rounded-full border border-slate-600">Generative AI</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">DDPM</h3>
-                    <div class="flex items-center gap-1.5 text-xs text-slate-400 mb-4 font-mono"><i data-lucide="calendar" class="w-3.5 h-3.5"></i><span>Aug 2025</span></div>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Implementation of Denoising Diffusion Probabilistic Models (DDPM) for image generation using PyTorch and UNet.</p>
-                    <div class="flex flex-wrap gap-2 mt-auto">
-                        <span class="text-xs font-medium text-blue-200 bg-blue-900/30 px-2 py-1 rounded-md border border-blue-800/50">Diffusion Models</span>
-                        <span class="text-xs font-medium text-blue-200 bg-blue-900/30 px-2 py-1 rounded-md border border-blue-800/50">UNet</span>
-                    </div>
-                </a>
-
-                <!-- Projects 4-6 (Condensed mapping) -->
-                <a href="https://github.com/ProgramerSalar" target="_blank" class="group bg-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-6 transition-all duration-300 hover:bg-slate-800 flex flex-col h-full">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="p-2 bg-blue-500/10 text-blue-400 rounded-lg group-hover:scale-110 transition-transform"><i data-lucide="folder-git-2" class="w-6 h-6"></i></div>
-                        <span class="text-xs font-medium px-2.5 py-1 bg-slate-700/50 text-slate-300 rounded-full border border-slate-600">Open Source</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">CogVideo-Optimization</h3>
-                    <div class="flex items-center gap-1.5 text-xs text-slate-400 mb-4 font-mono"><i data-lucide="calendar" class="w-3.5 h-3.5"></i><span>Feb 2026 - Mar 2026</span></div>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Contributions to the open-source CogVideo text-to-video generation model to improve inference speed.</p>
-                    <div class="flex flex-wrap gap-2 mt-auto">
-                        <span class="text-xs font-medium text-blue-200 bg-blue-900/30 px-2 py-1 rounded-md border border-blue-800/50">CUDA</span>
-                    </div>
-                </a>
-
-                <a href="https://github.com/ProgramerSalar/stable-diffusion-from-scratch" target="_blank" class="group bg-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-6 transition-all duration-300 hover:bg-slate-800 flex flex-col h-full">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="p-2 bg-blue-500/10 text-blue-400 rounded-lg group-hover:scale-110 transition-transform"><i data-lucide="folder-git-2" class="w-6 h-6"></i></div>
-                        <span class="text-xs font-medium px-2.5 py-1 bg-slate-700/50 text-slate-300 rounded-full border border-slate-600">Generative AI</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">stable-diffusion-from-scratch</h3>
-                    <div class="flex items-center gap-1.5 text-xs text-slate-400 mb-4 font-mono"><i data-lucide="calendar" class="w-3.5 h-3.5"></i><span>Feb 2025</span></div>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Built a stable diffusion model completely from scratch to deeply understand latent space manipulations.</p>
-                    <div class="flex flex-wrap gap-2 mt-auto">
-                        <span class="text-xs font-medium text-blue-200 bg-blue-900/30 px-2 py-1 rounded-md border border-blue-800/50">PyTorch</span>
-                    </div>
-                </a>
-
-                 <a href="https://github.com/ProgramerSalar/LPIPS" target="_blank" class="group bg-slate-800/50 border border-slate-700 hover:border-blue-500/50 rounded-2xl p-6 transition-all duration-300 hover:bg-slate-800 flex flex-col h-full">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="p-2 bg-blue-500/10 text-blue-400 rounded-lg group-hover:scale-110 transition-transform"><i data-lucide="folder-git-2" class="w-6 h-6"></i></div>
-                        <span class="text-xs font-medium px-2.5 py-1 bg-slate-700/50 text-slate-300 rounded-full border border-slate-600">AI Metrics</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">LPIPS</h3>
-                    <div class="flex items-center gap-1.5 text-xs text-slate-400 mb-4 font-mono"><i data-lucide="calendar" class="w-3.5 h-3.5"></i><span>Oct 2024</span></div>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Implementation of the Learned Perceptual Image Patch Similarity metric for perceptual quality evaluation.</p>
-                    <div class="flex flex-wrap gap-2 mt-auto">
-                        <span class="text-xs font-medium text-blue-200 bg-blue-900/30 px-2 py-1 rounded-md border border-blue-800/50">Computer Vision</span>
-                    </div>
-                </a>
-            </div>
-            
-            <div class="mt-12 text-center">
-                <a href="https://github.com/ProgramerSalar?tab=repositories" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-slate-900 rounded-lg font-medium hover:bg-blue-50 transition-colors">
-                    <i data-lucide="github" class="w-5 h-5"></i> View All on GitHub
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="huggingface" class="py-24 bg-slate-800 text-white border-t border-slate-700">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-white flex items-center gap-3">
-                    <span class="text-4xl">🤗</span> Open Weights & Datasets
-                </h2>
-                <p class="mt-4 text-lg text-slate-400 max-w-2xl">A deep dive into my live model checkpoints and proprietary ground-truth datasets hosted on Hugging Face.</p>
-                <div class="h-1 w-20 bg-yellow-500 mt-6 rounded-full"></div>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-                
-                <!-- Asset 1 -->
-                <a href="https://huggingface.co/zulense/Z1_V0.1.0" target="_blank" class="group bg-slate-900/50 border border-slate-700 hover:border-yellow-500/50 rounded-2xl p-6 transition-all duration-300 hover:bg-slate-900 flex flex-col h-full relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-500/5 rounded-full blur-2xl -mr-16 -mt-16 group-hover:bg-yellow-500/10 transition-colors"></div>
-                    <div class="flex justify-between items-start mb-4 relative z-10">
-                        <div class="p-2 rounded-lg group-hover:scale-110 transition-transform bg-indigo-500/10 text-indigo-400"><i data-lucide="brain-circuit" class="w-6 h-6"></i></div>
-                        <span class="text-xs font-medium px-2.5 py-1 rounded-full border bg-indigo-900/30 text-indigo-300 border-indigo-800/50">Model</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors relative z-10">zulense/Z1_V0.1.0</h3>
-                    <div class="flex items-center gap-1.5 text-xs text-slate-400 mb-4 font-mono relative z-10"><i data-lucide="calendar" class="w-3.5 h-3.5"></i><span>Dec 2025</span></div>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow relative z-10">The foundational Z1 Imagination Engine prototype. A spatial-temporal pipeline explicitly conditioned for whiteboard pedagogical rendering.</p>
-                    <div class="flex flex-wrap gap-2 mt-auto relative z-10">
-                        <span class="text-xs font-medium text-slate-300 bg-slate-800 px-2 py-1 rounded-md border border-slate-700">Text-to-Video</span>
-                    </div>
-                </a>
-
-                <!-- Asset 2 -->
-                <a href="https://huggingface.co/datasets/zulense/white_board" target="_blank" class="group bg-slate-900/50 border border-slate-700 hover:border-yellow-500/50 rounded-2xl p-6 transition-all duration-300 hover:bg-slate-900 flex flex-col h-full relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-500/5 rounded-full blur-2xl -mr-16 -mt-16 group-hover:bg-yellow-500/10 transition-colors"></div>
-                    <div class="flex justify-between items-start mb-4 relative z-10">
-                        <div class="p-2 rounded-lg group-hover:scale-110 transition-transform bg-emerald-500/10 text-emerald-400"><i data-lucide="database" class="w-6 h-6"></i></div>
-                        <span class="text-xs font-medium px-2.5 py-1 rounded-full border bg-emerald-900/30 text-emerald-300 border-emerald-800/50">Dataset</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors relative z-10">zulense/white_board</h3>
-                    <div class="flex items-center gap-1.5 text-xs text-slate-400 mb-4 font-mono relative z-10"><i data-lucide="calendar" class="w-3.5 h-3.5"></i><span>Jan 2026</span></div>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow relative z-10">Initial ground-truth dataset featuring proprietary stroke-level annotations, gathered using an automated in-house handwriting engine.</p>
-                    <div class="flex flex-wrap gap-2 mt-auto relative z-10">
-                        <span class="text-xs font-medium text-slate-300 bg-slate-800 px-2 py-1 rounded-md border border-slate-700">Computer Vision</span>
-                    </div>
-                </a>
-                
-                <!-- Asset 3 -->
-                <a href="https://huggingface.co/datasets/ProgramerSalar/clip_video" target="_blank" class="group bg-slate-900/50 border border-slate-700 hover:border-yellow-500/50 rounded-2xl p-6 transition-all duration-300 hover:bg-slate-900 flex flex-col h-full relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-500/5 rounded-full blur-2xl -mr-16 -mt-16 group-hover:bg-yellow-500/10 transition-colors"></div>
-                    <div class="flex justify-between items-start mb-4 relative z-10">
-                        <div class="p-2 rounded-lg group-hover:scale-110 transition-transform bg-emerald-500/10 text-emerald-400"><i data-lucide="database" class="w-6 h-6"></i></div>
-                        <span class="text-xs font-medium px-2.5 py-1 rounded-full border bg-emerald-900/30 text-emerald-300 border-emerald-800/50">Dataset</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors relative z-10">ProgramerSalar/clip_video</h3>
-                    <div class="flex items-center gap-1.5 text-xs text-slate-400 mb-4 font-mono relative z-10"><i data-lucide="calendar" class="w-3.5 h-3.5"></i><span>Jan 2026</span></div>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow relative z-10">Custom curated video dataset tailored for foundational generative AI models and custom latent extraction metric testing.</p>
-                    <div class="flex flex-wrap gap-2 mt-auto relative z-10">
-                        <span class="text-xs font-medium text-slate-300 bg-slate-800 px-2 py-1 rounded-md border border-slate-700">Video Dataset</span>
-                    </div>
-                </a>
-            </div>
-
-            <div class="mt-12 text-center">
-                <a href="https://huggingface.co/ProgramerSalar" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-yellow-500/10 text-yellow-500 border border-yellow-500/20 rounded-lg font-medium hover:bg-yellow-500/20 transition-colors">
-                    <span class="text-lg">🤗</span> View Full Profile
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="skills" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">Technical Arsenal</h2>
-                <div class="h-1 w-20 bg-blue-600 mt-6 rounded-full"></div>
-            </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-                <!-- AI & ML -->
-                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="p-3 bg-blue-100 text-blue-600 rounded-lg"><i data-lucide="brain-circuit" class="w-6 h-6"></i></div>
-                        <h3 class="text-xl font-bold text-slate-900">AI & Deep Learning</h3>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-4 py-2 bg-white border border-slate-200 rounded-full text-sm font-medium text-slate-700">Generative AI</span>
-                        <span class="px-4 py-2 bg-white border border-slate-200 rounded-full text-sm font-medium text-slate-700">Diffusion Models</span>
-                        <span class="px-4 py-2 bg-white border border-slate-200 rounded-full text-sm font-medium text-slate-700">PyTorch</span>
-                        <span class="px-4 py-2 bg-white border border-slate-200 rounded-full text-sm font-medium text-slate-700">Transformers</span>
-                        <span class="px-4 py-2 bg-white border border-slate-200 rounded-full text-sm font-medium text-slate-700">Computer Vision</span>
-                    </div>
-                </div>
-
-                <!-- Web Dev -->
-                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="p-3 bg-indigo-100 text-indigo-600 rounded-lg"><i data-lucide="code-2" class="w-6 h-6"></i></div>
-                        <h3 class="text-xl font-bold text-slate-900">Programming & Web</h3>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-4 py-2 bg-white border border-slate-200 rounded-full text-sm font-medium text-slate-700">Python</span>
-                        <span class="px-4 py-2 bg-white border border-slate-200 rounded-full text-sm font-medium text-slate-700">JavaScript</span>
-                        <span class="px-4 py-2 bg-white border border-slate-200 rounded-full text-sm font-medium text-slate-700">React.js</span>
-                        <span class="px-4 py-2 bg-white border border-slate-200 rounded-full text-sm font-medium text-slate-700">Flask / Django</span>
-                    </div>
-                </div>
-
-                <!-- Data & Infra -->
-                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="p-3 bg-slate-200 text-slate-700 rounded-lg"><i data-lucide="database" class="w-6 h-6"></i></div>
-                        <h3 class="text-xl font-bold text-slate-900">Data & Infrastructure</h3>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-4 py-2 bg-white border border-slate-200 rounded-full text-sm font-medium text-slate-700">Data Engineering</span>
-                        <span class="px-4 py-2 bg-white border border-slate-200 rounded-full text-sm font-medium text-slate-700">Pandas</span>
-                        <span class="px-4 py-2 bg-white border border-slate-200 rounded-full text-sm font-medium text-slate-700">MongoDB</span>
-                        <span class="px-4 py-2 bg-white border border-slate-200 rounded-full text-sm font-medium text-slate-700">Model Deployment</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="flex items-center gap-2">
-                <span class="text-xl font-bold tracking-tighter text-white">Manish<span class="text-blue-500">.</span></span>
-                <span class="text-slate-500 text-sm">© 2026</span>
-            </div>
-            
-            <div class="flex items-center space-x-6">
-                <a href="mailto:manish@lab.zulense.com" class="flex items-center gap-2 hover:text-white transition-colors">
-                    <i data-lucide="mail" class="w-4 h-4"></i> <span class="text-sm">manish@lab.zulense.com</span>
-                </a>
-                <a href="https://www.zulense.com" target="_blank" class="flex items-center gap-2 hover:text-white transition-colors">
-                    <i data-lucide="external-link" class="w-4 h-4"></i> <span class="text-sm">zulense.com</span>
-                </a>
-            </div>
-        </div>
-    </footer>
-
-    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
-    <script>
-        // 1. Initialize Lucide Icons
-        lucide.createIcons();
-
-        // 2. Navbar Scroll Effect
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 20) {
-                nav.classList.add('bg-white/90', 'backdrop-blur-md', 'shadow-sm');
-                nav.classList.remove('bg-transparent', 'py-5');
-                nav.classList.add('py-3');
-            } else {
-                nav.classList.remove('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'py-3');
-                nav.classList.add('bg-transparent', 'py-5');
-            }
-        });
-
-        // 3. Mobile Menu Toggle
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuIcon = document.getElementById('menu-icon');
-        let isMenuOpen = false;
-
-        menuBtn.addEventListener('click', () => {
-            isMenuOpen = !isMenuOpen;
-            mobileMenu.classList.toggle('hidden');
-            
-            // Swap icons between Menu (hamburger) and X (close)
-            if (isMenuOpen) {
-                menuIcon.setAttribute('data-lucide', 'x');
-            } else {
-                menuIcon.setAttribute('data-lucide', 'menu');
-            }
-            lucide.createIcons(); // Re-render the icon
-        });
-
-        // 4. Smooth Scrolling for Navigation Links
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('data-target');
-                const targetElement = document.getElementById(targetId);
-                
-                if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth' });
-                }
-                
-                // Auto-close mobile menu if it's open
-                if (isMenuOpen) {
-                    mobileMenu.classList.add('hidden');
-                    isMenuOpen = false;
-                    menuIcon.setAttribute('data-lucide', 'menu');
-                    lucide.createIcons();
-                }
-            });
-        });
-    </script>
+        </section>
+    </div>
 </body>
 </html>
